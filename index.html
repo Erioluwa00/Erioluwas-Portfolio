@@ -19,7 +19,87 @@
             --eris-border-width: 2.5px;
             --eris-shadow-offset: 4px;
             --eris-font-main: 'Inter', sans-serif;
+            
+            /* Dark mode variables */
+            /* --dark-bg-color:  #3d3d34;
+            --dark-text-color: #f0f0f0;
+            --dark-card-bg: #2d2d2d;
+            --dark-border-color: #444;
+            --dark-shadow-color: #000; */
         }
+
+        /* Dark mode class */
+        /* body.dark-mode {
+            --eris-bg-color: var(--dark-bg-color);
+            --eris-black: #ccc;
+            background-color: var(--dark-bg-color);
+            color: var(--dark-text-color);
+        }
+        
+        body.dark-mode .eris-nav-container,
+        body.dark-mode .eris-polaroid-frame,
+        body.dark-mode .eris-about-container,
+        body.dark-mode .eris-service-card,
+        body.dark-mode .eris-testimonial-card,
+        body.dark-mode .eris-contact-container,
+        body.dark-mode .eris-portfolio-card,
+        body.dark-mode .eris-card-image-box,
+        body.dark-mode .eris-input,
+        body.dark-mode .eris-textarea {
+            background-color: var(--dark-card-bg) !important;
+            border-color: var(--dark-border-color) !important;
+            color: var(--dark-text-color) !important;
+        }
+        
+        body.dark-mode .eris-inner-image,
+        body.dark-mode .eris-about-photo-inner {
+            background-color: #3a3a3a !important;
+            border-color: var(--dark-border-color) !important;
+        }
+        
+        body.dark-mode .eris-tools-strip {
+            background-color: #333 !important;
+            color: #fff !important;
+        }
+        
+        body.dark-mode .eris-grid-wrapper {
+            border-color: var(--dark-border-color) !important;
+            background-color: var(--dark-border-color) !important;
+        }
+        
+        body.dark-mode .eris-sidebar-stats,
+        body.dark-mode .eris-service-card {
+            background-color: var(--dark-card-bg) !important;
+        }
+        
+        body.dark-mode .eris-sketchy-border::before,
+        body.dark-mode .eris-sketchy-border::after,
+        body.dark-mode .eris-border-v-left,
+        body.dark-mode .eris-border-v-right {
+            background-color: var(--dark-border-color) !important;
+        }
+        
+        body.dark-mode .eris-arrow-btn {
+            background-color: var(--dark-border-color) !important;
+            color: var(--dark-text-color) !important;
+        }
+        
+        body.dark-mode .eris-cta-button,
+        body.dark-mode .eris-stat-pill,
+        body.dark-mode .eris-submit-btn {
+            background-color: var(--dark-card-bg) !important;
+            color: var(--dark-text-color) !important;
+            border-color: var(--dark-border-color) !important;
+        }
+        
+        body.dark-mode .eris-btn-line {
+            background-color: var(--dark-text-color) !important;
+        }
+        
+        body.dark-mode .eris-highlight {
+            background-color: #444 !important;
+            color: var(--dark-text-color) !important;
+        } */
 
         * {
             box-sizing: border-box;
@@ -36,6 +116,7 @@
             flex-direction: column;
             min-height: 100vh;
             font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* --- UTILITIES --- */
@@ -46,25 +127,56 @@
             transform: skewX(-12deg);
         }
 
-        /* --- HEADER SECTION --- */
+        /* --- STICKY HEADER --- */
         .eris-header-wrapper {
             width: 100%;
             padding: 15px 20px;
             display: flex;
             justify-content: center;
             border-bottom: var(--eris-border-width) solid var(--eris-black);
-            background-color: #fff;
-            position: relative;
-            z-index: 10;
+            background-color: var(--eris-bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        /* Theme toggle button */
+        .eris-theme-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--eris-bg-color);
+            border: var(--eris-border-width) solid var(--eris-black);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 2px 2px 0px var(--eris-black);
+            transition: all 0.3s;
+        }
+        
+        .eris-theme-toggle:hover {
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        .eris-theme-toggle:active {
+            transform: translateY(-50%) scale(0.95);
         }
 
         .eris-nav-container {
             display: flex;
             border: var(--eris-border-width) solid var(--eris-black);
             box-shadow: var(--eris-shadow-offset) var(--eris-shadow-offset) 0px var(--eris-black);
-            background: #fff;
+            background: var(--eris-bg-color);
             max-width: 600px;
             width: 100%;
+            position: relative;
         }
 
         .eris-brand-box {
@@ -108,7 +220,7 @@
         }
 
         .eris-nav-item.active {
-            background-color: #fff;
+            background-color: var(--eris-bg-color);
             position: relative;
         }
         
@@ -125,7 +237,54 @@
         }
 
         .eris-nav-item:hover {
-            background-color: #f0f0f0;
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        body.dark-mode .eris-nav-item:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- BACK TO TOP BUTTON --- */
+        .eris-back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--eris-accent-red);
+            border: var(--eris-border-width) solid var(--eris-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 3px 3px 0px var(--eris-black);
+        }
+        
+        .eris-back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .eris-back-to-top:hover {
+            background-color: var(--eris-accent-pink);
+            transform: translateY(-3px);
+        }
+        
+        .eris-back-to-top:active {
+            transform: translateY(1px);
+            box-shadow: 1px 1px 0px var(--eris-black);
+        }
+        
+        .eris-back-to-top i {
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         /* --- MAIN HERO SECTION --- */
@@ -262,7 +421,7 @@
             width: 100%;
             max-width: 380px;
             aspect-ratio: 1 / 1.1;
-            background: #fff;
+            background: var(--eris-bg-color);
             border: 3px solid var(--eris-black);
             padding: 30px 20px 50px 20px;
             position: relative;
@@ -410,6 +569,7 @@
             padding: 25px 0;
             margin-top: 30px;
             width: 100%;
+            transition: all 0.3s;
         }
 
         .eris-tools-container {
@@ -435,7 +595,7 @@
         */
         a {
             text-decoration: none;
-            color: black;
+            color: inherit;
         }
         
         .eris-about-section {
@@ -451,10 +611,11 @@
             grid-template-columns: 1fr 1.2fr;
             gap: 50px;
             align-items: center;
-            background-color: #fff;
+            background-color: var(--eris-bg-color);
             border: 3px solid var(--eris-black);
             padding: 40px;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+            transition: all 0.3s;
         }
 
         /* Visual Side (Left) */
@@ -468,13 +629,14 @@
         .eris-about-photo-frame {
             width: 320px;
             height: 320px;
-            background: #fff;
+            background: var(--eris-bg-color);
             border: 3px solid var(--eris-black);
             padding: 12px 12px 50px 12px; /* Polaroid padding */
             transform: rotate(-3deg);
             z-index: 2;
             position: relative;
             box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s;
         }
 
         /* Pure CSS Pattern for Profile Placeholder */
@@ -487,6 +649,7 @@
             align-items: center;
             justify-content: center;
             object-fit: cover;
+            transition: all 0.3s;
         }
 
         /* Floating decoration star behind photo */
@@ -525,7 +688,8 @@
         .eris-about-text {
             font-size: 1rem;
             line-height: 1.6;
-            color: #333;
+            color: inherit;
+            opacity: 0.9;
         }
 
         /* Stats Pill */
@@ -544,6 +708,7 @@
             box-shadow: 3px 3px 0px var(--eris-black);
             transition: transform 0.2s;
             font-size: 0.9rem;
+            cursor: pointer;
         }
 
         .eris-stat-pill:hover {
@@ -596,12 +761,14 @@
             border: var(--eris-border-width) solid var(--eris-black);
             background-color: var(--eris-black);
             gap: var(--eris-border-width);
+            transition: all 0.3s;
         }
 
         .eris-sidebar-stats {
             background-color: var(--eris-bg-color);
             display: flex;
             flex-direction: column;
+            transition: all 0.3s;
         }
 
         .eris-stat-block {
@@ -641,6 +808,7 @@
             align-items: flex-start;
             min-height: 250px;
             position: relative;
+            transition: all 0.3s;
         }
 
         .eris-icon-circle {
@@ -672,6 +840,7 @@
             line-height: 1.5;
             margin-bottom: 20px;
             max-width: 90%;
+            opacity: 0.9;
         }
 
         .eris-learn-more-box {
@@ -780,11 +949,12 @@
         /* Individual Card with Sketchy Borders */
         .eris-portfolio-card {
             position: relative;
-            background: #fff;
+            background: var(--eris-bg-color);
             padding: 15px 15px 25px 15px;
             display: flex;
             flex-direction: column;
             margin: 10px; 
+            transition: all 0.3s;
         }
 
         /* The sketchy border lines container */
@@ -836,10 +1006,10 @@
             border: 3px solid var(--eris-black);
             margin-bottom: 15px;
             position: relative;
-            /* overflow: hidden; */
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s;
         }
 
         /* Card Text */
@@ -867,7 +1037,7 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        
+      
         .eris-arrow-btn:hover {
             transform: scale(1.1);
         }
@@ -875,7 +1045,8 @@
         .eris-card-tags {
             font-size: 0.9rem;
             font-weight: 500;
-            color: #444;
+            color: inherit;
+            opacity: 0.8;
             line-height: 1.4;
         }
 
@@ -924,7 +1095,7 @@
         }
 
         .eris-testimonial-card {
-            background: #fff;
+            background: var(--eris-bg-color);
             border: 3px solid var(--eris-black);
             padding: 25px;
             box-shadow: 6px 6px 0px rgba(0,0,0,0.15);
@@ -982,7 +1153,8 @@
 
         .eris-client-details p {
             font-size: 0.8rem;
-            color: #555;
+            color: inherit;
+            opacity: 0.7;
             font-weight: 500;
         }
 
@@ -998,7 +1170,7 @@
 
         .eris-contact-container {
             width: 100%;
-            background-color: #fff;
+            background-color: var(--eris-bg-color);
             border: 3px solid var(--eris-black);
             padding: 50px 30px;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.3);
@@ -1036,6 +1208,7 @@
             max-width: 600px;
             margin: 0 auto 30px auto;
             font-weight: 500;
+            opacity: 0.9;
         }
 
         /* Form Styles */
@@ -1065,7 +1238,8 @@
             font-family: var(--eris-font-main);
             font-size: 0.95rem;
             border: 2.5px solid var(--eris-black);
-            background: #fff;
+            background: var(--eris-bg-color);
+            color: inherit;
             outline: none;
             transition: box-shadow 0.2s;
             border-radius: 8px;
@@ -1095,6 +1269,7 @@
             padding: 25px 20px;
             margin-top: auto;
             background-color: var(--eris-bg-color);
+            transition: all 0.3s;
         }
 
         .eris-footer-container {
@@ -1260,6 +1435,18 @@
                 padding: 8px 5px;
             }
             
+            /* Theme toggle for mobile */
+            .eris-theme-toggle {
+                position: relative;
+                right: 0;
+                top: 0;
+                transform: none;
+                margin: 10px auto;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
             /* Tools Section */
             .eris-tools-strip { padding: 20px 0; }
             .eris-tool-item { font-size: 1.1rem; }
@@ -1384,6 +1571,14 @@
             }
             
             .eris-footer { padding: 20px; }
+            
+            /* Back to top button mobile */
+            .eris-back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1505,8 +1700,29 @@
             .eris-footer-brand { font-size: 1rem; }
             .eris-footer-year { font-size: 0.9rem; }
             .eris-footer-socials { font-size: 1.2rem; }
+            
+            /* Back to top button */
+            .eris-back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Animation keyframes */
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -1518,30 +1734,36 @@
                 erioluwa
             </div>
             <ul class="eris-nav-links">
-                <li class="eris-nav-item" >
-                    <a href="#about-section">
-                    About me</a></li>
+                <li class="eris-nav-item">
+                    <a href="#about-section">About me</a>
+                </li>
                 <li class="eris-nav-item active">
                     <a href="#my-projects">Projects</a>
-                    </li>
+                </li>
                 <li class="eris-nav-item">
-                    <a href="#contact-section">
-                    Hire Me</a></li>
+                    <a href="#contact-section">Hire Me</a>
+                </li>
             </ul>
         </nav>
+    
     </header>
+
+    <!-- Back to Top Button -->
+    <div class="eris-back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <!-- Main Hero -->
     <main class="eris-hero-section">
         
         <div class="eris-hero-visuals">
-            <div class="eris-name-tag"><span>☺</span> ERIOLUWA</div>
+            <div class="eris-name-tag"><span><i class="fa-regular fa-face-smile"></i></span> ERIOLUWA</div>
             <div class="eris-arrow-doodle">⤹</div>
             <div class="eris-polaroid-frame eris-frame-ticks">
                 <div class="eris-inner-image">
                     <img src="My_Picture-removebg-preview.png" class="eris-inner-image-img">
                 </div>
-                <div class="eris-sticker-bulb">💡</div>
+                <div class="eris-sticker-bulb"><i class="fa-regular fa-lightbulb"></i></div>
                 <div class="eris-sticker-red-star eris-css-star-wrapper eris-animate-roll">
                     <div class="eris-red-star-inner"></div>
                 </div>
@@ -1584,7 +1806,7 @@
        ADDED: NEW "ABOUT ME" SECTION
        ========================================================================
     -->
-    <section class="eris-about-section" >
+    <section class="eris-about-section">
         <div class="eris-about-container">
             <!-- Left: Visual/Photo Area -->
             <div class="eris-about-visual">
@@ -1602,7 +1824,7 @@
             </div>
 
             <!-- Right: Text Content -->
-            <div class="eris-about-content" >
+            <div class="eris-about-content">
                 <span class="eris-about-label">About Me</span>
                 <h2 class="eris-about-title">The brain behind the ideas</h2>
                 <p class="eris-about-text">
@@ -1659,7 +1881,7 @@
                     <div class="eris-learn-more-box">Learn more</div>
                 </article>
                 <article class="eris-service-card">
-                    <div class="eris-icon-circle eris-icon-cyan">✳</div>
+                    <div class="eris-icon-circle eris-icon-cyan"><i class="fa-solid fa-star"></i></div>
                     <h3 class="eris-service-title">Database Design & Management</h3>
                     <p class="eris-service-desc">Optimized schemas (SQL / NoSQL) <br>Data integrity and performance tuning</p>
                     <div class="eris-learn-more-box">Learn more</div>
@@ -1674,7 +1896,7 @@
             <h2 class="eris-portfolio-title" id="my-projects">My Projects</h2>
             <div class="eris-sticker-blue-star ">
                 <div class="eris-blue-star-inner eris-animate-roll">
-                    <span class="eris-sticker-face">☺</span>
+                    <span class="eris-sticker-face"><i class="fa-regular fa-face-smile"></i></span>
                 </div>
             </div>
         </div>
@@ -1691,7 +1913,7 @@
         
         <div class="eris-card-header">
             <h3 class="eris-card-title">Nictory Construction</h3>
-            <div class="eris-arrow-btn">↗</div>
+            <div class="eris-arrow-btn"> <i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
         <p class="eris-card-tags">Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.</p>
     </article>
@@ -1707,7 +1929,7 @@
         
         <div class="eris-card-header">
             <h3 class="eris-card-title">Rootora E-commerce</h3>
-            <div class="eris-arrow-btn">↗</div>
+            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
         <p class="eris-card-tags">Designed a nature-inspired online plant store with intuitive shopping experience, plant care education, and seamless checkout flow, increasing conversion by 35%.</p>
     </article>
@@ -1723,7 +1945,7 @@
         
         <div class="eris-card-header">
             <h3 class="eris-card-title">Staycation Booking Platform</h3>
-            <div class="eris-arrow-btn">↗</div>
+            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
         <p class="eris-card-tags">Redesigned a local travel platform focusing on accessibility and personalized recommendations, resulting in 50% faster booking completion and improved user retention.</p>
     </article>
@@ -1739,7 +1961,7 @@
         
         <div class="eris-card-header">
             <h3 class="eris-card-title">PetCare Connect Portal</h3>
-            <div class="eris-arrow-btn">↗</div>
+            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
         <p class="eris-card-tags">A veterinary service platform connecting pet owners with local clinics, featuring appointment scheduling, medical records access, and emergency service locator.</p>
     </article>
@@ -1755,7 +1977,7 @@
         
         <div class="eris-card-header">
             <h3 class="eris-card-title">Ankara Fabrics Store</h3>
-            <div class="eris-arrow-btn">↗</div>
+            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
         <p class="eris-card-tags">E-commerce platform specializing in authentic African Ankara fabrics, featuring high-quality product photography, size customization options, and worldwide shipping.</p>
     </article>
@@ -1771,7 +1993,7 @@
         
         <div class="eris-card-header">
             <h3 class="eris-card-title">AI Content Summarizer</h3>
-            <div class="eris-arrow-btn">↗</div>
+            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
         <p class="eris-card-tags">Designed an AI-powered tool that condenses lengthy articles into key points, featuring customizable summary length, readability scoring, and multi-language support.</p>
     </article>
@@ -1787,7 +2009,7 @@
         
         <div class="eris-card-header">
             <h3 class="eris-card-title">REmindER Website</h3>
-            <div class="eris-arrow-btn">↗</div>
+            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
         <p class="eris-card-tags">A straightforward task manager focused on core functionality - adding, editing, and deleting tasks with a clean, no-frills interface..</p>
     </article>
@@ -1906,5 +2128,132 @@
         </div>
     </footer>
 
+    <script>
+        // // =========== THEME TOGGLE ===========
+        // const themeToggle = document.getElementById('themeToggle');
+        // const themeIcon = themeToggle.querySelector('i');
+        
+        // // Check for saved theme or prefer-color-scheme
+        // const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        // const currentTheme = localStorage.getItem('theme');
+        
+        // if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        //     document.body.classList.add('dark-mode');
+        //     themeIcon.className = 'fas fa-sun';
+        // } else {
+        //     themeIcon.className = 'fas fa-moon';
+        // }
+        
+        // // Toggle theme function
+        // themeToggle.addEventListener('click', () => {
+        //     document.body.classList.toggle('dark-mode');
+            
+        //     if (document.body.classList.contains('dark-mode')) {
+        //         themeIcon.className = 'fas fa-sun';
+        //         localStorage.setItem('theme', 'dark');
+        //     } else {
+        //         themeIcon.className = 'fas fa-moon';
+        //         localStorage.setItem('theme', 'light');
+        //     }
+        // });
+        
+        // =========== BACK TO TOP BUTTON ===========
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // Scroll to top when clicked
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // =========== ACTIVE NAV LINK SCROLL ===========
+        const navItems = document.querySelectorAll('.eris-nav-item');
+        const sections = document.querySelectorAll('section[id]');
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                const link = item.querySelector('a');
+                if (link && link.getAttribute('href').substring(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll for nav links
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = item.querySelector('a').getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // =========== FORM SUBMISSION ===========
+        const contactForm = document.querySelector('.eris-contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Get form values
+                const name = contactForm.querySelector('input[type="text"]').value;
+                const email = contactForm.querySelector('input[type="email"]').value;
+                const message = contactForm.querySelector('textarea').value;
+                
+                // Basic validation
+                if (!name || !email || !message) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                // In a real application, you would send this data to a server
+                // For now, just show a success message
+                alert(`Thank you ${name}! Your message has been sent. I'll get back to you soon at ${email}.`);
+                contactForm.reset();
+            });
+        }
+        
+        // =========== PORTFOLIO CARD INTERACTION ===========
+        const portfolioCards = document.querySelectorAll('.eris-portfolio-card');
+        portfolioCards.forEach(card => {
+            const arrowBtn = card.querySelector('.eris-arrow-btn');
+            if (arrowBtn) {
+                arrowBtn.addEventListener('click', () => {
+                    // In a real application, this would open the project
+                    alert('This would open the project in a new tab or modal in a real implementation.');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
