@@ -1051,6 +1051,193 @@
             line-height: 1.4;
         }
 
+
+            /* Update existing CSS */
+.eris-portfolio-card {
+    position: relative;
+    background: var(--eris-bg-color);
+    padding: 20px 20px 25px 20px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px; 
+    transition: all 0.3s;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.eris-card-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: inherit;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+/* Tech Stack Styles */
+.eris-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.eris-tech-tag {
+    background: var(--eris-black);
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Key Features Styles */
+.eris-key-features {
+    padding: 12px 15px;
+   
+}
+
+.eris-key-features h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--eris-black);
+}
+
+.eris-key-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.eris-key-features li {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    position: relative;
+    opacity: 0.85;
+}
+
+.eris-key-features li:before {
+    content: "♡";
+    position: absolute;
+    left: 0;
+    color: var(--eris-black);
+    font-weight: bolder;
+  
+}
+
+/* Button Styles */
+.eris-card-buttons {
+    display: flex;
+    gap: 10px;
+    /* margin-top: 10px; */
+}
+
+.eris-btn {
+    flex: 1;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.eris-btn-demo {
+  background-color: var(--eris-accent-purple);
+            border: 2px solid var(--eris-black);
+            padding: 13px 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 3px 3px 0px var(--eris-black);
+            transition: transform 0.2s;
+            font-size: 0.9rem;
+            cursor: pointer;
+}
+
+.eris-btn-code {
+  background-color: var(--eris-accent-red);
+            border: 2px solid var(--eris-black);
+            padding: 13px 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 3px 3px 0px var(--eris-black);
+            transition: transform 0.2s;
+            font-size: 0.9rem;
+            cursor: pointer;
+}
+
+.eris-btn-demo:hover {
+    background-color: var(--eris-accent-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.eris-btn-code:hover {
+   background-color: var(--eris-accent-purple);
+    /* color: #fff; */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Make sure grid layout accommodates taller cards */
+.eris-portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 10px;
+    padding: 15px;
+}
+
+/* Add hover effect to entire card */
+.eris-portfolio-card:hover {
+    transform: translateY(-5px);
+}
+
+.eris-portfolio-card:hover .eris-card-image-box {
+    transform: scale(1.02);
+}
+
+/* Arrow button stays the same */
+.eris-arrow-btn {
+    background: var(--eris-black);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.eris-arrow-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Add some responsive adjustments */
+@media (max-width: 768px) {
+    .eris-portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .eris-card-buttons {
+        flex-direction: column;
+    }
+}
+
+
         /* --- TESTIMONIALS SECTION --- */
         .eris-testimonials-section {
             max-width: 1200px;
@@ -1902,22 +2089,284 @@
             </div>
         </div>
 
+
+
+        
         <div class="eris-portfolio-grid">
-    <!-- Project 1 -->
+
+              <!-- Project 4 -->
     <article class="eris-portfolio-card">
         <div class="eris-sketchy-border">
             <span class="eris-border-v-left"></span>
             <span class="eris-border-v-right"></span>
         </div>
+
+        <div class="eris-card-image-box"><img src="pet website.png" class="project-image"></div>
         
-        <div class="eris-card-image-box"><img src="nictory-project.png" class="project-image"></div>
+        <div class="eris-card-header">
+            <h3 class="eris-card-title">PetCare Connect Portal</h3>
+            <a href="https://fur-ever-care2.vercel.app/" target="_blank">
+            <div class="eris-arrow-btn">  <i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div></a>
+        </div>
+        <!-- <p class="eris-card-description">
+            Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.
+        </p> -->
+        
+        <div class="eris-tech-stack">
+            <span class="eris-tech-tag">HTML5</span>
+            <span class="eris-tech-tag">CSS3</span>
+            <span class="eris-tech-tag">JavaScript</span>
+            <span class="eris-tech-tag">GSAP</span>
+        </div>
+        
+        <div class="eris-key-features">
+            <h4>Key Features</h4>
+            <ul>
+                <li>Interactive project galleries</li>
+                <li>Client testimonials section</li>
+                <li>Service portfolio showcase</li>
+                <li>Contact form with validation</li>
+            </ul>
+        </div>
+        
+        <div class="eris-card-buttons">
+            <a href="https://fur-ever-care2.vercel.app/" target="_blank" class="eris-btn eris-btn-demo">
+                <i class="fa-solid fa-play-circle"></i> Live Demo
+            </a>
+            <a href="https://github.com/Erioluwa00/FurEver_Care" target="_blank" class="eris-btn eris-btn-code">
+                <i class="fa-solid fa-code"></i> View Code
+            </a>
+        </div>
+    </article>
+
+   <!-- Project 5 -->
+    <article class="eris-portfolio-card">
+        <div class="eris-sketchy-border">
+            <span class="eris-border-v-left"></span>
+            <span class="eris-border-v-right"></span>
+        </div>
+
+        <div class="eris-card-image-box"><img src="ankara website.png" class="project-image"></div>
+        
+        <div class="eris-card-header">
+            <h3 class="eris-card-title">Ankara Fabrics Store</h3>
+            <a href="https://uniquefabrics.netlify.app/" target="_blank" ><div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div></a>
+        </div>
+ <!-- <p class="eris-card-description">
+            Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.
+        </p> -->
+        
+        <div class="eris-tech-stack">
+            <span class="eris-tech-tag">HTML5</span>
+            <span class="eris-tech-tag">CSS3</span>
+            <span class="eris-tech-tag">JavaScript</span>
+            <span class="eris-tech-tag">GSAP</span>
+        </div>
+        
+        <div class="eris-key-features">
+            <h4>Key Features</h4>
+            <ul>
+                <li>Interactive project galleries</li>
+                <li>Client testimonials section</li>
+                <li>Service portfolio showcase</li>
+                <li>Contact form with validation</li>
+            </ul>
+        </div>
+        
+        <div class="eris-card-buttons">
+            <a href="https://uniquefabrics.netlify.app/" target="_blank"  class="eris-btn eris-btn-demo">
+                <i class="fa-solid fa-play-circle"></i> Live Demo
+            </a>
+            <a href="https://github.com/Erioluwa00/Unique_Fabric" target="_blank" class="eris-btn eris-btn-code">
+                <i class="fa-solid fa-code"></i> View Code
+            </a>
+        </div>
+    </article>
+
+    <!-- Project 1 -->
+   <article class="eris-portfolio-card">
+        <div class="eris-sketchy-border">
+            <span class="eris-border-v-left"></span>
+            <span class="eris-border-v-right"></span>
+        </div>
+        
+        <div class="eris-card-image-box">
+            <img src="nictory-project.png" class="project-image" alt="Nictory Construction Project">
+        </div>
         
         <div class="eris-card-header">
             <h3 class="eris-card-title">Nictory Construction</h3>
-            <div class="eris-arrow-btn"> <i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
+            <a href="https://nictory-website.netlify.app/" target="_blank" ><div class="eris-arrow-btn">
+                <i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i>
+            </div></a>
         </div>
-        <p class="eris-card-tags">Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.</p>
+        
+        <!-- <p class="eris-card-description">
+            Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.
+        </p>
+         -->
+        <div class="eris-tech-stack">
+            <span class="eris-tech-tag">HTML5</span>
+            <span class="eris-tech-tag">CSS3</span>
+            <span class="eris-tech-tag">JavaScript</span>
+            <span class="eris-tech-tag">GSAP</span>
+        </div>
+        
+        <div class="eris-key-features">
+            <h4>Key Features</h4>
+            <ul>
+                <li>Interactive project galleries</li>
+                <li>Client testimonials section</li>
+                <li>Service portfolio showcase</li>
+                <li>Contact form with validation</li>
+            </ul>
+        </div>
+        
+        <div class="eris-card-buttons">
+            <a href="https://nictory-website.netlify.app/" target="_blank" class="eris-btn eris-btn-demo">
+                <i class="fa-solid fa-play-circle"></i> Live Demo
+            </a>
+            <a href="https://github.com/Erioluwa00/Nictory-Website2"  target="_blank" class="eris-btn eris-btn-code">
+                <i class="fa-solid fa-code"></i> View Code
+            </a>
+        </div>
     </article>
+
+
+     <!-- Project 8 -->
+    <article class="eris-portfolio-card">
+        <div class="eris-sketchy-border">
+            <span class="eris-border-v-left"></span>
+            <span class="eris-border-v-right"></span>
+        </div>
+
+        <div class="eris-card-image-box"><img src="medical-website.png" class="project-image"></div>
+        
+        <div class="eris-card-header">
+            <h3 class="eris-card-title">VitalCheck</h3>
+           <a href="https://vital-check.netlify.app/#" target="_blank" >  <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div></a>
+        </div>
+        <!-- <p class="eris-card-description">
+            Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.
+        </p> -->
+        
+        <div class="eris-tech-stack">
+            <span class="eris-tech-tag">HTML5</span>
+            <span class="eris-tech-tag">CSS3</span>
+            <span class="eris-tech-tag">JavaScript</span>
+            <span class="eris-tech-tag">GSAP</span>
+        </div>
+        
+        <div class="eris-key-features">
+            <h4>Key Features</h4>
+            <ul>
+                <li>Interactive project galleries</li>
+                <li>Client testimonials section</li>
+                <li>Service portfolio showcase</li>
+                <li>Contact form with validation</li>
+            </ul>
+        </div>
+        
+        <div class="eris-card-buttons">
+            <a href="https://vital-check.netlify.app/#" target="_blank" class="eris-btn eris-btn-demo">
+                <i class="fa-solid fa-play-circle"></i> Live Demo
+            </a>
+            <a href="https://github.com/Erioluwa00/VitalCheck" target="_blank" class="eris-btn eris-btn-code">
+                <i class="fa-solid fa-code"></i> View Code
+            </a>
+        </div>
+    </article>
+
+
+       <!-- Project 6 -->
+    <article class="eris-portfolio-card">
+        <div class="eris-sketchy-border">
+            <span class="eris-border-v-left"></span>
+            <span class="eris-border-v-right"></span>
+        </div>
+
+        <div class="eris-card-image-box"><img src="summarizer website.png" class="project-image"></div>
+        
+        <div class="eris-card-header">
+            <h3 class="eris-card-title">AI Content Summarizer</h3>
+            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
+        </div>
+         <!-- <p class="eris-card-description">
+            Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.
+        </p> -->
+        
+        <div class="eris-tech-stack">
+            <span class="eris-tech-tag">HTML5</span>
+            <span class="eris-tech-tag">CSS3</span>
+            <span class="eris-tech-tag">JavaScript</span>
+            <span class="eris-tech-tag">GSAP</span>
+        </div>
+        
+        <div class="eris-key-features">
+            <h4>Key Features</h4>
+            <ul>
+                <li>Interactive project galleries</li>
+                <li>Client testimonials section</li>
+                <li>Service portfolio showcase</li>
+                <li>Contact form with validation</li>
+            </ul>
+        </div>
+        
+        <div class="eris-card-buttons">
+            <a href="#" class="eris-btn eris-btn-demo">
+                <i class="fa-solid fa-play-circle"></i> Live Demo
+            </a>
+            <a href="#" class="eris-btn eris-btn-code">
+                <i class="fa-solid fa-code"></i> View Code
+            </a>
+        </div>
+    </article>
+
+
+
+      <!-- Project 7 -->
+    <article class="eris-portfolio-card">
+        <div class="eris-sketchy-border">
+            <span class="eris-border-v-left"></span>
+            <span class="eris-border-v-right"></span>
+        </div>
+
+        <div class="eris-card-image-box"><img src="todo website.png" class="project-image"></div>
+        
+        <div class="eris-card-header">
+            <h3 class="eris-card-title">REmindER Website</h3>
+           <a href="https://eri-to-do-list.netlify.app/" target="_blank" > <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div></a>
+        </div>
+   
+        
+        <div class="eris-tech-stack">
+            <span class="eris-tech-tag">HTML5</span>
+            <span class="eris-tech-tag">CSS3</span>
+            <span class="eris-tech-tag">JavaScript</span>
+            <span class="eris-tech-tag">GSAP</span>
+        </div>
+        
+        <div class="eris-key-features">
+            <h4>Key Features</h4>
+            <ul>
+                <li>Interactive project galleries</li>
+                <li>Client testimonials section</li>
+                <li>Service portfolio showcase</li>
+                <li>Contact form with validation</li>
+            </ul>
+        </div>
+        
+        <div class="eris-card-buttons">
+            <a href="https://eri-to-do-list.netlify.app/" target="_blank" class="eris-btn eris-btn-demo">
+                <i class="fa-solid fa-play-circle"></i> Live Demo
+            </a>
+            <a href="#" class="eris-btn eris-btn-code">
+                <i class="fa-solid fa-code"></i> View Code
+            </a>
+        </div>
+    </article>
+
+
 
     <!-- Project 2 -->
     <article class="eris-portfolio-card">
@@ -1932,7 +2381,35 @@
             <h3 class="eris-card-title">Rootora E-commerce</h3>
             <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
-        <p class="eris-card-tags">Designed a nature-inspired online plant store with intuitive shopping experience, plant care education, and seamless checkout flow, increasing conversion by 35%.</p>
+        <!-- <p class="eris-card-description">
+            Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.
+        </p> -->
+        
+        <div class="eris-tech-stack">
+            <span class="eris-tech-tag">HTML5</span>
+            <span class="eris-tech-tag">CSS3</span>
+            <span class="eris-tech-tag">JavaScript</span>
+            <span class="eris-tech-tag">GSAP</span>
+        </div>
+        
+        <div class="eris-key-features">
+            <h4>Key Features</h4>
+            <ul>
+                <li>Interactive project galleries</li>
+                <li>Client testimonials section</li>
+                <li>Service portfolio showcase</li>
+                <li>Contact form with validation</li>
+            </ul>
+        </div>
+        
+        <div class="eris-card-buttons">
+            <a href="#" class="eris-btn eris-btn-demo">
+                <i class="fa-solid fa-play-circle"></i> Live Demo
+            </a>
+            <a href="#" class="eris-btn eris-btn-code">
+                <i class="fa-solid fa-code"></i> View Code
+            </a>
+        </div>
     </article>
 
     <!-- Project 3 -->
@@ -1948,72 +2425,41 @@
             <h3 class="eris-card-title">Staycation Booking Platform</h3>
             <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
         </div>
-        <p class="eris-card-tags">Redesigned a local travel platform focusing on accessibility and personalized recommendations, resulting in 50% faster booking completion and improved user retention.</p>
-    </article>
-
-    <!-- Project 4 -->
-    <article class="eris-portfolio-card">
-        <div class="eris-sketchy-border">
-            <span class="eris-border-v-left"></span>
-            <span class="eris-border-v-right"></span>
-        </div>
-
-        <div class="eris-card-image-box"><img src="pet website.png" class="project-image"></div>
+         <!-- <p class="eris-card-description">
+            Professional construction company website showcasing residential and commercial projects, service offerings, and client testimonials with interactive project galleries.
+        </p> -->
         
-        <div class="eris-card-header">
-            <h3 class="eris-card-title">PetCare Connect Portal</h3>
-            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
+        <div class="eris-tech-stack">
+            <span class="eris-tech-tag">HTML5</span>
+            <span class="eris-tech-tag">CSS3</span>
+            <span class="eris-tech-tag">JavaScript</span>
+            <span class="eris-tech-tag">GSAP</span>
         </div>
-        <p class="eris-card-tags">A veterinary service platform connecting pet owners with local clinics, featuring appointment scheduling, medical records access, and emergency service locator.</p>
-    </article>
-
-    <!-- Project 5 -->
-    <article class="eris-portfolio-card">
-        <div class="eris-sketchy-border">
-            <span class="eris-border-v-left"></span>
-            <span class="eris-border-v-right"></span>
-        </div>
-
-        <div class="eris-card-image-box"><img src="ankara website.png" class="project-image"></div>
         
-        <div class="eris-card-header">
-            <h3 class="eris-card-title">Ankara Fabrics Store</h3>
-            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
+        <div class="eris-key-features">
+            <h4>Key Features</h4>
+            <ul>
+                <li>Interactive project galleries</li>
+                <li>Client testimonials section</li>
+                <li>Service portfolio showcase</li>
+                <li>Contact form with validation</li>
+            </ul>
         </div>
-        <p class="eris-card-tags">E-commerce platform specializing in authentic African Ankara fabrics, featuring high-quality product photography, size customization options, and worldwide shipping.</p>
-    </article>
-
-    <!-- Project 6 -->
-    <article class="eris-portfolio-card">
-        <div class="eris-sketchy-border">
-            <span class="eris-border-v-left"></span>
-            <span class="eris-border-v-right"></span>
-        </div>
-
-        <div class="eris-card-image-box"><img src="summarizer website.png" class="project-image"></div>
         
-        <div class="eris-card-header">
-            <h3 class="eris-card-title">AI Content Summarizer</h3>
-            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
+        <div class="eris-card-buttons">
+            <a href="#" class="eris-btn eris-btn-demo">
+                <i class="fa-solid fa-play-circle"></i> Live Demo
+            </a>
+            <a href="#" class="eris-btn eris-btn-code">
+                <i class="fa-solid fa-code"></i> View Code
+            </a>
         </div>
-        <p class="eris-card-tags">Designed an AI-powered tool that condenses lengthy articles into key points, featuring customizable summary length, readability scoring, and multi-language support.</p>
     </article>
 
-      <!-- Project 7 -->
-    <article class="eris-portfolio-card">
-        <div class="eris-sketchy-border">
-            <span class="eris-border-v-left"></span>
-            <span class="eris-border-v-right"></span>
-        </div>
 
-        <div class="eris-card-image-box"><img src="todo website.png" class="project-image"></div>
-        
-        <div class="eris-card-header">
-            <h3 class="eris-card-title">REmindER Website</h3>
-            <div class="eris-arrow-btn"><i class="fa-solid fa-arrow-up" style="transform: rotate(45deg);"></i></div>
-        </div>
-        <p class="eris-card-tags">A straightforward task manager focused on core functionality - adding, editing, and deleting tasks with a clean, no-frills interface..</p>
-    </article>
+
+
+
 </div>
     </section>
 
@@ -2245,16 +2691,16 @@
         }
         
         // =========== PORTFOLIO CARD INTERACTION ===========
-        const portfolioCards = document.querySelectorAll('.eris-portfolio-card');
-        portfolioCards.forEach(card => {
-            const arrowBtn = card.querySelector('.eris-arrow-btn');
-            if (arrowBtn) {
-                arrowBtn.addEventListener('click', () => {
-                    // In a real application, this would open the project
-                    alert('This would open the project in a new tab or modal in a real implementation.');
-                });
-            }
-        });
+        // const portfolioCards = document.querySelectorAll('.eris-portfolio-card');
+        // portfolioCards.forEach(card => {
+        //     const arrowBtn = card.querySelector('.eris-arrow-btn');
+        //     if (arrowBtn) {
+        //         arrowBtn.addEventListener('click', () => {
+        //             // In a real application, this would open the project
+        //             alert('This would open the project in a new tab or modal in a real implementation.');
+        //         });
+        //     }
+        // });
     </script>
 </body>
 </html>
