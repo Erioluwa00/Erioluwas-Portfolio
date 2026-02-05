@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erioluwa's Portfolio</title>
+    <link rel="icon" href="favicon3.png" type="image/png">
+
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
@@ -1910,8 +1912,59 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        .eris-form-success, 
+        .eris-form-error {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .eris-form-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        
+        .eris-form-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        
+        .eris-submit-btn.loading {
+            opacity: 0.8;
+            cursor: not-allowed;
+        }
+        
+        .eris-submit-btn.loading .btn-text {
+            display: none;
+        }
+        
+        .eris-submit-btn.loading::after {
+            content: 'Sending...';
+        }
+        
+        .eris-emailjs-loading {
+            text-align: center;
+            padding: 10px;
+            font-style: italic;
+            color: #666;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+     <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("5JlJqlEuGam4E-LtD");
+        })();
+    </script>
+    
 </head>
 <body>
 
@@ -2530,22 +2583,31 @@
                 Want to see how to transform your brand into a unique style? Send us a message.
             </p>
 
-            <form class="eris-contact-form">
+            <!-- Success/Error Messages -->
+            <div class="eris-form-success" id="formSuccess">
+                <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. I'll get back to you soon!
+            </div>
+            
+            <div class="eris-form-error" id="formError">
+                <i class="fas fa-exclamation-circle"></i> Oops! Something went wrong. Please try again or contact me directly.
+            </div>
+
+            <form class="eris-contact-form" id="contactForm">
                 <div class="eris-form-group">
                     <label class="eris-label">Name</label>
-                    <input type="text" class="eris-input" placeholder="Your name">
+                    <input type="text" class="eris-input" name="from_name" id="from_name" placeholder="Your name" required>
                 </div>
                 <div class="eris-form-group">
                     <label class="eris-label">Email</label>
-                    <input type="email" class="eris-input" placeholder="Your email">
+                    <input type="email" class="eris-input" name="reply_to" id="reply_to" placeholder="Your email" required>
                 </div>
                 <div class="eris-form-group">
                     <label class="eris-label">Message</label>
-                    <textarea class="eris-textarea" placeholder="Tell us about your project"></textarea>
+                    <textarea class="eris-textarea" name="message" id="message" placeholder="Tell us about your project" required></textarea>
                 </div>
                 
-                <button type="submit" class="eris-cta-button eris-submit-btn">
-                    Send us message
+                <button type="submit" class="eris-cta-button eris-submit-btn" id="submitBtn">
+                    <span class="btn-text">Send us message</span>
                     <div class="eris-btn-lines">
                         <div class="eris-btn-line"></div>
                         <div class="eris-btn-line"></div>
@@ -2575,33 +2637,267 @@
     </footer>
 
     <script>
-        // // =========== THEME TOGGLE ===========
-        // const themeToggle = document.getElementById('themeToggle');
-        // const themeIcon = themeToggle.querySelector('i');
+    // =========== BACK TO TOP BUTTON ===========
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+    
+    // Scroll to top when clicked
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // =========== ACTIVE NAV LINK SCROLL ===========
+    const navItems = document.querySelectorAll('.eris-nav-item');
+    const sections = document.querySelectorAll('section[id]');
+    
+    // Update active nav link on scroll
+    window.addEventListener('scroll', () => {
+        let current = '';
         
-        // // Check for saved theme or prefer-color-scheme
-        // const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        // const currentTheme = localStorage.getItem('theme');
-        
-        // if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-        //     document.body.classList.add('dark-mode');
-        //     themeIcon.className = 'fas fa-sun';
-        // } else {
-        //     themeIcon.className = 'fas fa-moon';
-        // }
-        
-        // // Toggle theme function
-        // themeToggle.addEventListener('click', () => {
-        //     document.body.classList.toggle('dark-mode');
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
             
-        //     if (document.body.classList.contains('dark-mode')) {
-        //         themeIcon.className = 'fas fa-sun';
-        //         localStorage.setItem('theme', 'dark');
-        //     } else {
-        //         themeIcon.className = 'fas fa-moon';
-        //         localStorage.setItem('theme', 'light');
-        //     }
-        // });
+            if (pageYOffset >= (sectionTop - 100)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            const link = item.querySelector('a');
+            if (link && link.getAttribute('href').substring(1) === current) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // Smooth scroll for nav links
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.querySelector('a').getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // =========== EMAILJS FORM SUBMISSION ===========
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formSuccess = document.getElementById('formSuccess');
+    const formError = document.getElementById('formError');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('from_name').value;
+            const email = document.getElementById('reply_to').value;
+            const message = document.getElementById('message').value;
+            
+            // Basic validation
+            if (!name || !email || !message) {
+                showError('Please fill in all fields');
+                return;
+            }
+            
+            // Email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            
+            // Hide previous messages
+            if (formSuccess) formSuccess.style.display = 'none';
+            if (formError) formError.style.display = 'none';
+            
+            // Prepare template parameters
+            const templateParams = {
+                from_name: name,
+                reply_to: email,
+                message: message,
+                date: new Date().toLocaleString()
+            };
+            
+            try {
+                // Send email using EmailJS
+                const response = await emailjs.send(
+                    'service_3n851bn', // SERVICE ID
+                    'template_f147f7u', // TEMPLATE ID
+                    templateParams
+                );
+                
+                // Success
+                console.log('Email sent successfully:', response);
+                showSuccess();
+                contactForm.reset();
+                
+            } catch (error) {
+                // Error
+                console.error('Email sending failed:', error);
+                showError('Failed to send message. Please try again.');
+            } finally {
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        });
+    }
+    
+    function showSuccess() {
+        if (!formSuccess) return;
+        
+        formSuccess.style.display = 'block';
+        if (formError) formError.style.display = 'none';
+        
+        // Scroll to show success message
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+            formSuccess.style.display = 'none';
+        }, 5000);
+    }
+    
+    function showError(errorMessage) {
+        if (!formError) return;
+        
+        formError.textContent = `✗ ${errorMessage}`;
+        formError.style.display = 'block';
+        if (formSuccess) formSuccess.style.display = 'none';
+        
+        // Scroll to show error message
+        formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    // =========== PORTFOLIO CARD INTERACTION ===========
+    // Optional: If you want to add interactions to portfolio cards
+    const portfolioCards = document.querySelectorAll('.eris-portfolio-card');
+    portfolioCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+</script>
+
+    <!-- <script>
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formSuccess = document.getElementById('formSuccess');
+        const formError = document.getElementById('formError');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('from_name').value;
+                const email = document.getElementById('reply_to').value;
+                const message = document.getElementById('message').value;
+                
+                // Basic validation
+                if (!name || !email || !message) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+                
+                // Email validation
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    showError('Please enter a valid email address');
+                    return;
+                }
+                
+                // Show loading state
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+                
+                // Hide previous messages
+                formSuccess.style.display = 'none';
+                formError.style.display = 'none';
+                
+                // Prepare template parameters
+                const templateParams = {
+                    from_name: name,
+                    reply_to: email,
+                    message: message,
+                    date: new Date().toLocaleString()
+                };
+                
+                try {
+                    // Send email using EmailJS
+                    const response = await emailjs.send(
+                        'service_3n851bn', // SERVICE ID
+                        'template_f147f7u', // TEMPLATE ID
+                        templateParams
+                    );
+                    
+                    // Success
+                    console.log('Email sent successfully:', response);
+                    showSuccess();
+                    contactForm.reset();
+                    
+                } catch (error) {
+                    // Error
+                    console.error('Email sending failed:', error);
+                    showError('Failed to send message. Please try again.');
+                } finally {
+                    // Reset button state
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+        
+        function showSuccess() {
+            formSuccess.style.display = 'block';
+            formError.style.display = 'none';
+            
+            // Scroll to show success message
+            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                formSuccess.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showError(errorMessage) {
+            formError.textContent = `✗ ${errorMessage}`;
+            formError.style.display = 'block';
+            formSuccess.style.display = 'none';
+            
+            // Scroll to show error message
+            formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
         
         // =========== BACK TO TOP BUTTON ===========
         const backToTopBtn = document.getElementById('backToTop');
@@ -2700,6 +2996,6 @@
         //         });
         //     }
         // });
-    </script>
+    </script> -->
 </body>
 </html>

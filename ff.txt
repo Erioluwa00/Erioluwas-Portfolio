@@ -1,0 +1,164 @@
+<section class="eris-contact-section" id="contact-section">
+        <div class="eris-contact-container">
+            <!-- Star Deco Top Right -->
+            <div class="eris-contact-star">
+                <div class="eris-contact-star-inner eris-animate-roll"></div>
+            </div>
+
+            <h2 class="eris-contact-title">Let's start designing your project</h2>
+            <p class="eris-contact-subtitle">
+                Want to see how to transform your brand into a unique style? Send us a message.
+            </p>
+
+            <form class="eris-contact-form">
+                <div class="eris-form-group">
+                    <label class="eris-label">Name</label>
+                    <input type="text" class="eris-input" placeholder="Your name">
+                </div>
+                <div class="eris-form-group">
+                    <label class="eris-label">Email</label>
+                    <input type="email" class="eris-input" placeholder="Your email">
+                </div>
+                <div class="eris-form-group">
+                    <label class="eris-label">Message</label>
+                    <textarea class="eris-textarea" placeholder="Tell us about your project"></textarea>
+                </div>
+                
+                <button type="submit" class="eris-cta-button eris-submit-btn">
+                    Send us message
+                    <div class="eris-btn-lines">
+                        <div class="eris-btn-line"></div>
+                        <div class="eris-btn-line"></div>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </section>
+
+
+
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+     const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formSuccess = document.getElementById('formSuccess');
+        const formError = document.getElementById('formError');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('from_name').value;
+                const email = document.getElementById('reply_to').value;
+                const message = document.getElementById('message').value;
+                
+                // Basic validation
+                if (!name || !email || !message) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+                
+                // Email validation
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    showError('Please enter a valid email address');
+                    return;
+                }
+                
+                // Show loading state
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+                
+                // Hide previous messages
+                formSuccess.style.display = 'none';
+                formError.style.display = 'none';
+                
+                // Prepare template parameters
+                const templateParams = {
+                    from_name: name,
+                    reply_to: email,
+                    message: message,
+                    date: new Date().toLocaleString()
+                };
+                
+                try {
+                    // Send email using EmailJS
+                    const response = await emailjs.send(
+                        'service_3n851bn', // SERVICE ID
+                        'template_f147f7u', // TEMPLATE ID
+                        templateParams
+                    );
+                    
+                    // Success
+                    console.log('Email sent successfully:', response);
+                    showSuccess();
+                    contactForm.reset();
+                    
+                } catch (error) {
+                    // Error
+                    console.error('Email sending failed:', error);
+                    showError('Failed to send message. Please try again.');
+                } finally {
+                    // Reset button state
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+        
+        function showSuccess() {
+            formSuccess.style.display = 'block';
+            formError.style.display = 'none';
+            
+            // Scroll to show success message
+            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                formSuccess.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showError(errorMessage) {
+            formError.textContent = `✗ ${errorMessage}`;
+            formError.style.display = 'block';
+            formSuccess.style.display = 'none';
+            
+            // Scroll to show error message
+            formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // ... (THE REST OF YOUR EXISTING JAVASCRIPT) ...
+    </script>
+</body>
+</html>
+
+
+        // // =========== THEME TOGGLE ===========
+        // const themeToggle = document.getElementById('themeToggle');
+        // const themeIcon = themeToggle.querySelector('i');
+        
+        // // Check for saved theme or prefer-color-scheme
+        // const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        // const currentTheme = localStorage.getItem('theme');
+        
+        // if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        //     document.body.classList.add('dark-mode');
+        //     themeIcon.className = 'fas fa-sun';
+        // } else {
+        //     themeIcon.className = 'fas fa-moon';
+        // }
+        
+        // // Toggle theme function
+        // themeToggle.addEventListener('click', () => {
+        //     document.body.classList.toggle('dark-mode');
+            
+        //     if (document.body.classList.contains('dark-mode')) {
+        //         themeIcon.className = 'fas fa-sun';
+        //         localStorage.setItem('theme', 'dark');
+        //     } else {
+        //         themeIcon.className = 'fas fa-moon';
+        //         localStorage.setItem('theme', 'light');
+        //     }
+        // });
