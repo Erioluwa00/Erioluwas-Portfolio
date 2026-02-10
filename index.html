@@ -392,7 +392,14 @@
             transform: translate(2px, 2px);
             box-shadow: 2px 2px 0px var(--eris-black);
         }
-
+        .eris-cta-button-div{
+            display: flex;
+        }
+        .resume-button{
+            margin-left: 20px;
+            background-color: var(--eris-accent-red);
+            color: white;
+        }
         .eris-btn-lines {
             position: absolute;
             right: -25px;
@@ -1510,7 +1517,20 @@
             .eris-sticker-blue-star { margin-left: 250px; }
             .eris-polaroid-frame { max-width: 340px; }
         }
-
+           @media (max-width: 915px) {
+        .eris-cta-button-div{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            
+        }
+         .resume-button{
+            background-color: var(--eris-accent-red);
+            color: white;
+            margin-top: 10px;
+            margin-left: 0;
+        }
+           }
         @media (max-width: 900px) {
             .eris-headline { font-size: 2.8rem; }
             .eris-grid-wrapper { grid-template-columns: 200px 1fr; }
@@ -1570,7 +1590,7 @@
             
             .eris-sticky-note { 
                 margin: 0 auto 20px; 
-                transform: rotate(-5deg); 
+                /* transform: rotate(-5deg);  */
                 width: 70px;
                 height: 70px;
                 font-size: 2rem;
@@ -2018,6 +2038,7 @@
                 I build <span class="eris-emoji-hand"></span>scalable web and mobile<br>
                  <span class="eris-highlight"> applications</span>
             </h1>
+            <div class="eris-cta-button-div">
             <a href="#my-projects" class="eris-cta-button">
                 See My Projects
                 <div class="eris-btn-lines">
@@ -2025,6 +2046,14 @@
                     <div class="eris-btn-line"></div>
                 </div>
             </a>
+             <a href="#my-projects" class="eris-cta-button resume-button">
+                View My Resume
+                <div class="eris-btn-lines">
+                    <div class="eris-btn-line"></div>
+                    <div class="eris-btn-line"></div>
+                </div>
+            </a>
+            </div>
             <div class="eris-css-star-wrapper eris-deco-bl eris-animate-roll" style="position:fixed; bottom:10px; left:10px;">
                 <div class="eris-css-star-inner"></div>
             </div>
